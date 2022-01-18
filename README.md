@@ -1,6 +1,6 @@
 # `gh start` GitHub CLI extension
 
-[GitHub CLI](https://github.com/cli/cli) extension for fuzzy finding, quickly find starred repo
+[GitHub CLI](https://github.com/cli/cli) extension for quickly fuzzy finding starred repo(WIP)
 
 ## Installation
 ```
