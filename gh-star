@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-# fizz finder starred repos
+# fuzzy finder starred repos
 
 QUERY='
 	query { 
