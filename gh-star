@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -e
+
+# fizz finder starred repos
+
+QUERY='
+	query { 
+		viewer { 
+			login
+			starredRepositories {
+				totalCount
+				edges {
+					node {
+						name
+						description
+						nameWithOwner
+					}
+				}
+			}
+		}
+	}
+'
+TEMPLATE='
+  {{- range $repo := .data.viewer.starredRepositories.edges -}}
+    {{- printf "name: %s - stargazers: %v\n" $repo.node.nameWithOwner $repo.node.description -}}
+  {{- end -}}
+'
+exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}" --cache 1h | fzf --ansi --multi --preview 'gh repo {}'
