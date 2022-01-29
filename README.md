@@ -1,15 +1,10 @@
 # `gh start` GitHub CLI extension
 
-[GitHub CLI](https://github.com/cli/cli) extension for quickly fuzzy finding starred repo(WIP)
+[GitHub CLI](https://github.com/cli/cli) extension for quickly fuzzy finding starred repo using [fzf](https://github.com/junegunn/fzf#readme).
 
 ## Installation
 ```
 gh extension install keidarcy/gh-star
-```
-
-This extension depends on [fzf](https://github.com/junegunn/fzf#readme) as a fuzzy finder. To install using Homebrew:
-```
-brew install fzf
 ```
 
 ## Usage
@@ -17,4 +12,9 @@ brew install fzf
 gh star
 ```
 
-Displays an interactive starred repo picker.
+<details>
+  <summary>Expand for Demo</summary>
+  ![Demo](./demo.gif)
+</details>
+
+Displays an interactive starred repo picker and show URL to open.

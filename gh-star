@@ -4,25 +4,32 @@ set -e
 # fuzzy finder starred repos
 
 QUERY='
-	query { 
-		viewer { 
-			login
-			starredRepositories {
-				totalCount
-				edges {
-					node {
-						name
-						description
-						nameWithOwner
-					}
-				}
-			}
-		}
-	}
+query {
+    viewer {
+        login
+        starredRepositories {
+            totalCount
+            edges {
+                node {
+                    description
+                    nameWithOwner
+                }
+            }
+        }
+    }
+}
 '
+
 TEMPLATE='
-  {{- range $repo := .data.viewer.starredRepositories.edges -}}
-    {{- printf "name: %s - stargazers: %v\n" $repo.node.nameWithOwner $repo.node.description -}}
-  {{- end -}}
+{{- range $repo := .data.viewer.starredRepositories.edges -}}
+{{ "name" | color "yellow" }}
+{{- printf ": %s - " $repo.node.nameWithOwner -}}
+{{ "description" | color "blue" }}
+{{- printf ": %v\n" $repo.node.description -}}
+{{- end -}}
 '
-exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}" --cache 1h | fzf
+
+exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}" --cache 1h \
+    | fzf --ansi --multi --preview 'gh repo view {+2}' \
+    | xargs \
+    | awk -v a="Detail in https://github.com/" -F " " '{print a b $2 " :)."}'
