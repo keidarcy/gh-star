@@ -1,6 +1,6 @@
-# `gh start` GitHub CLI extension
+# `gh star` GitHub CLI extension
 
-[GitHub CLI](https://github.com/cli/cli) extension for quickly fuzzy finding starred repo using [fzf](https://github.com/junegunn/fzf#readme).
+[GitHub CLI](https://github.com/cli/cli) extension to fuzzy search starred repo using [fzf](https://github.com/junegunn/fzf#readme).
 
 ## Installation
 ```
@@ -14,6 +14,7 @@ gh star
 
 <details>
   <summary>Expand for Demo</summary>
+
   ![Demo](./demo.gif)
 </details>
 
