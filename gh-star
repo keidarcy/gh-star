@@ -3,6 +3,16 @@ set -e
 
 # fuzzy finder starred repos
 
+_help() {
+    echo "Usage: gh star [options]
+
+GitHub CLI extension to fuzzy search starred repo using fzf.
+
+Options:
+    -w, --watch            Open a repository in the browser
+    -h, --help             Show this help message"
+}
+
 QUERY='
 query {
     viewer {
@@ -29,7 +39,26 @@ TEMPLATE='
 {{- end -}}
 '
 
-exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}" --cache 1h \
-    | fzf --ansi --multi --preview 'gh repo view {+2}' \
-    | xargs \
-    | awk -v a="Detail in https://github.com/" -F " " '{print a b $2 " :)."}'
+case "$1" in
+  -h|--help)
+    _help
+    exit 0
+    ;;
+  -w|--watch)
+    exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}" --cache 10h \
+        | fzf --ansi --height 80% --preview 'gh repo view {+2}' \
+        | cut -d " " -f 2 \
+        | xargs gh repo view -w \
+  ;;
+  *)
+    exec gh api graphql -f query="${QUERY}" --paginate --template="${TEMPLATE}" --cache 10h \
+        | fzf --ansi --height 80% --preview 'gh repo view {+2}' \
+        | xargs \
+        | awk -v a="Detail in https://github.com/" -F " " '{print a b $2 "."}'
+  esac
+
+# exit 1 if fzf not installed
+if ! command -v fzf > /dev/null; then
+echo "Error: Install \`fzf\` to use this command." >&2
+  exit 1
+fi

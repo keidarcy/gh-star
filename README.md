@@ -9,7 +9,13 @@ gh extension install keidarcy/gh-star
 
 ## Usage
 ```
-gh star
+Usage: gh star [options]
+
+GitHub CLI extension to fuzzy search starred repo using fzf.
+
+Options:
+    -w, --watch            Open a repository in the browser
+    -h, --help             Show this help message
 ```
 
 <details>
@@ -18,4 +24,4 @@ gh star
   ![Demo](./demo.gif)
 </details>
 
-Displays an interactive starred repo picker and show URL to open.
+Displays an interactive starred repo picker and open in browser.
