@@ -1,6 +1,6 @@
 # `gh star` GitHub CLI extension
 
-[GitHub CLI](https://github.com/cli/cli) extension to fuzzy search starred repo using [fzf](https://github.com/junegunn/fzf#readme).
+[GitHub CLI](https://github.com/cli/cli) extension to fuzzy search from current account _all_ starred repo using [fzf](https://github.com/junegunn/fzf#readme).
 
 ## Installation
 ```
