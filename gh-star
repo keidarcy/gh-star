@@ -14,11 +14,15 @@ Options:
 }
 
 QUERY='
-query {
+query FetchStarredRepo($endCursor: String) {
     viewer {
         login
-        starredRepositories {
+        starredRepositories(first: 100, after: $endCursor) {
             totalCount
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
             edges {
                 node {
                     description
